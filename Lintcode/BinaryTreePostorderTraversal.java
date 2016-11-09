@@ -57,20 +57,10 @@ public class Solution {
         Stack<TreeNode> nodes = new Stack<>();
         TreeNode current = root;
 
-        while (current != null || !nodes.empty()) {
-            while (current != null) {
-                nodes.push(current);
-                current = current.left;
-            }
 
-            current = nodes.peek();
-            if (current.right != null) {
-                current = current.right;
-            } else {
-                result.add(current.val);
-                nodes.pop();
-            }
-        }
+
+
+	
         return result;
     }
 }
