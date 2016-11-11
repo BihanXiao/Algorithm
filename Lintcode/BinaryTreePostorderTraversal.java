@@ -56,11 +56,32 @@ public class Solution {
         ArrayList<Integer> result = new ArrayList<>();
         Stack<TreeNode> nodes = new Stack<>();
         TreeNode current = root;
+        TreeNode prev = null;
 
+        if (root == null) {
+            return result;
+        }
 
+        nodes.push(current);
+        while (!nodes.empty()) {
+            current = nodes.peek();
+            if (prev == null || prev.left == current || prev.right == current) {    // travel down the tree
+                if (current.left != null) {
+                    nodes.push(current.left);
+                } else if (current.right != null) {
+                    nodes.push(current.right);
+                }
+            } else if (current.left == prev) {    // travel up the tree
+                if (current.right != null) {
+                    nodes.push(current.right);
+                }
+            } else {    // include two types of situations: current.right == prev, current == prev (from current.right == null) // if we write this seperately, we will exceed time limit.
+                result.add(current.val);
+                nodes.pop();
+            }
+            prev = current;
+        }
 
-
-	
         return result;
     }
 }
